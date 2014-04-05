@@ -1,0 +1,32 @@
+{
+  "name": "validictorian",
+  "version": "0.0.0",
+  "description": "Node validations without ties to any framework. Based on validator.",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/samora/validictorian.git"
+  },
+  "keywords": [
+    "node",
+    "validator",
+    "validation",
+    "validate",
+    "validations"
+  ],
+  "author": "Samora Dake",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/samora/validictorian/issues"
+  },
+  "homepage": "https://github.com/samora/validictorian",
+  "dependencies": {
+    "validator": "~3.6.0"
+  },
+  "devDependencies": {
+    "should": "~3.2.0"
+  }
+}
