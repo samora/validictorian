@@ -20,7 +20,7 @@ simple enough to handle validations using any framework.
 npm install validictorian
 ```
 
-Just pass in the object to be validated (eg. request body) and validation rules. 
+Just pass in an object to be validated (eg. request body) and validation rules. 
 
 __NOTE__: Fields in object to be validated cannot be nested.
 
@@ -116,6 +116,8 @@ Can be used similarly in other frameworks.
 #### `body`
 
 An object containing the fields to be validated as `key, value` pairs.
+
+_NOTE_: Does not support nested fields.
 
 Example:
 ```javascript
