@@ -136,7 +136,7 @@ An object stating the rules used to validate `body`. Takes the following format:
 {
   <field>: {
     <validator>: {
-      args: <Optional array of arguments to validator function>,
+      args: <Optional array of arguments to validator method>,
       msg: <Required message in case validation fails>
     }
   }
