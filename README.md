@@ -71,7 +71,7 @@ var validate = require('validictorian'),
   parse = require('co-body');
 
 app.post('/users', function *(){
-  var body = parse(this);
+  var body = yield parse(this);
 
   var rules = {
     name: {
@@ -92,7 +92,7 @@ app.post('/users', function *(){
     }
   };
 
-  var errors = validate(req.body, rules);
+  var errors = validate(body, rules);
 
   if (errors)
     return this.body= {
@@ -115,22 +115,22 @@ Can be used similarly in other frameworks.
 
 #### `body`
 
-An object containing the fields to be validated as key, value pairs.
+An object containing the fields to be validated as `key, value` pairs.
 
 Example:
 ```javascript
 var body = {
   name: 'Samora Dake',
   email: 'samora@example.com',
-  phone: ''
-  gender: 'M'
+  phone: '',
+  gender: 'M',
   age: '27'
 };
 ```
 
 #### `rules`
 
-An object stating the rules to be used to validate `body`. It takes the following format:
+An object stating the rules used to validate `body`. Takes the following format:
 
 ```
 {
@@ -143,7 +143,7 @@ An object stating the rules to be used to validate `body`. It takes the followin
 }
 ```
 
-Where `<field>` is the field in  `body`, `<validator>` is the validator method.
+Where `<field>` is the field in  `body` and `<validator>` is the validator method.
 All validators in [validator](https://github.com/chriso/validator.js#validators) can be used.
 
 Example:
