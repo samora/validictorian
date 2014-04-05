@@ -11,20 +11,20 @@ var rules = {
   name: {
     isLength: {
       args: ['1'],
-      message: 'Name is required.'
+      msg: 'Name is required.'
     }
   },
 
   email: {
     isEmail: {
-      message: 'Email must be valid.'
+      msg: 'Email must be valid.'
     }
   },
 
   sex: {
     isLength: {
       args: ['1', '1'],
-      message: 'Sex must be 1 char long.'
+      msg: 'Sex must be 1 char long.'
     }
   }
 };
@@ -33,9 +33,9 @@ describe('validictorian', function() {
   it('should validate mapped errors', function (){
     var results = validate(body, rules, true);
 
-    results.name.should.be.equal(rules.name.isLength.message);
-    results.email.should.be.equal(rules.email.isEmail.message);
-    results.sex.should.be.equal(rules.sex.isLength.message);
+    results.name.should.be.equal(rules.name.isLength.msg);
+    results.email.should.be.equal(rules.email.isEmail.msg);
+    results.sex.should.be.equal(rules.sex.isLength.msg);
   });
 
   it.skip('should validate unmapped errors', function (){

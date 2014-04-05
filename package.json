@@ -11,11 +11,11 @@
     "url": "https://github.com/samora/validictorian.git"
   },
   "keywords": [
-    "node",
     "validator",
     "validation",
     "validate",
-    "validations"
+    "koa",
+    "express"
   ],
   "author": "Samora Dake",
   "license": "MIT",
