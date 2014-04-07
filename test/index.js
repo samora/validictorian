@@ -1,17 +1,19 @@
 // Dependencies
 var validate = require('..');
 
-var body = {
-  name: '',
-  email: 'user.example.com',
-  sex: 'Male'
-};
 
 var rules = {
   name: {
     isLength: {
       args: ['1'],
       msg: 'Name is required.'
+    }
+  },
+
+  username: {
+    matches: {
+      args: [/^[a-z0-9-_]+$/],
+      msg: 'Username can only contain a-z (lowercase alphabets), 0-9 (digits), _ (underscores) and - (hyphens).'
     }
   },
 
@@ -30,20 +32,36 @@ var rules = {
 };
 
 describe('validictorian', function() {
-  it('should validate mapped errors', function (){
+  it.only('should validate mapped errors', function (){
+    var body = {
+      name: '',
+      username: 'Very invalid',
+      email: 'user.example.com',
+      sex: 'Male'
+    };
+
     var results = validate(body, rules, true);
 
     results.name.should.be.equal(rules.name.isLength.msg);
+    results.username.should.be.equal(rules.username.matches.msg);
     results.email.should.be.equal(rules.email.isEmail.msg);
     results.sex.should.be.equal(rules.sex.isLength.msg);
   });
 
-  it.skip('should validate unmapped errors', function (){
+  it('should validate unmapped errors', function (){
+    var body = {
+      name: '',
+      username: 'Very invalid',
+      email: 'user.example.com',
+      sex: 'Male'
+    };
+
     var results = validate(body, rules);
 
-    results.length.should.be.equal(3);
-    results.indexOf('Name is required.').should.not.be.equal(-1);
-    results.indexOf('Email must be valid.').should.not.be.equal(-1);
-    results.indexOf('Sex must be 1 char long.').should.not.be.equal(-1);
+    results.length.should.be.equal(4);
+    results.indexOf(rules.name.isLength.msg).should.not.be.equal(-1);
+    results.indexOf(rules.username.matches.msg).should.not.be.equal(-1);
+    results.indexOf(rules.email.isEmail.msg).should.not.be.equal(-1);
+    results.indexOf(rules.sex.isLength.msg).should.not.be.equal(-1);
   });
 });
