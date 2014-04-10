@@ -1,6 +1,6 @@
 {
   "name": "validictorian",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node validations without ties to any framework. Based on validator.",
   "main": "index.js",
   "scripts": {
