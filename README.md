@@ -6,4 +6,4 @@ Node validations without ties to any framework. Based on [validator](https://git
 
 ## WARNING: DEPRICATED!!!
 
-This module has been depricated! Use [validr](https://github.com/samora/validr) instead.
+This module has been depricated! Use [Validr](https://github.com/samora/validr) instead.
