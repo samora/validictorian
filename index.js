@@ -14,51 +14,55 @@ module.exports = validictorian;
  * @param {boolean} mapped optional mapped error output
  * @return {array/object/null}
  */
-function validictorian(body, rules, mapped) {
+ function validictorian (body, rules, mapped) {
   var errors = [];
 
   if (mapped) errors = {};
 
-  // Process fields.
-  Object.keys(rules).forEach(function (key){
-    var field = body[key],
-      fieldRules = rules[key];
+  var fields = Object.keys(rules);
 
-    // Process field's rules.
-    Object.keys(fieldRules).forEach(function (k){
+  // Loop through rules' fields.
+  for (var i = 0; i < fields.length; i++){
+    var field = fields[i],
+      fieldRules = rules[field],
+      methods = Object.keys(fieldRules);
 
-      // Check if k is validator method
-      var notValidator = (k.slice(0, 2) !== 'is'
-        && k !== 'equals'
-        && k !== 'contains'
-        && k !== 'matches');
+    // Ensure field is in body.
+    if (Object.keys(body).indexOf(field) === -1) continue;
 
-      if (notValidator) return;
+    // Loop through field's rules;
+    for (var j = 0; j < methods.length; j++){
+      var method = methods[j];
 
+      // Ensure is validator method.
+      var notValidator = (method.slice(0, 2) !== 'is'
+        && method !== 'equals'
+        && method !== 'contains'
+        && method !== 'matches');
 
-      var args = fieldRules[k].args || [],
-        msg = fieldRules[k].msg,
-        method = validator[k],
-        bool;
+      if (notValidator) continue;
 
-      args.unshift(field);
+      var args = fieldRules[method].args || [],
+        msg = fieldRules[method].msg;
 
-      bool = method.apply(method, args);
+      args.unshift(body[field]);
 
-      if (bool) return;
+      // Apply validator method.
+      var valid = validator[method].apply(validator[method], args);
+
+      if (valid) continue;
 
       if (mapped)
-        errors[key] = msg;
+        errors[field] = msg;
       else
         errors.push(msg);
-
-    });
-  });
+    }
+  }
 
   // Return null if no errors.
-  if ((mapped && Object.keys(errors).length === 0) || (!mapped && errors.length === 0))
+  if ((mapped && Object.keys(errors).length === 0) 
+    || (!mapped && errors.length === 0))
     return null;
 
-
   return errors;
-}
+ }

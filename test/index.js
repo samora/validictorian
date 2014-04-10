@@ -1,11 +1,17 @@
 // Dependencies
 var validate = require('..');
 
+var body = {
+  name: '',
+  username: 'Very invalid',
+  email: 'user.example.com',
+  sex: 'Male'
+};
 
 var rules = {
   name: {
     isLength: {
-      args: ['1'],
+      args: [1],
       msg: 'Name is required.'
     }
   },
@@ -25,7 +31,7 @@ var rules = {
 
   sex: {
     isLength: {
-      args: ['1', '1'],
+      args: [1, 1],
       msg: 'Sex must be 1 char long.'
     }
   }
@@ -33,12 +39,6 @@ var rules = {
 
 describe('validictorian', function() {
   it.only('should validate mapped errors', function (){
-    var body = {
-      name: '',
-      username: 'Very invalid',
-      email: 'user.example.com',
-      sex: 'Male'
-    };
 
     var results = validate(body, rules, true);
 
@@ -49,12 +49,6 @@ describe('validictorian', function() {
   });
 
   it('should validate unmapped errors', function (){
-    var body = {
-      name: '',
-      username: 'Very invalid',
-      email: 'user.example.com',
-      sex: 'Male'
-    };
 
     var results = validate(body, rules);
 

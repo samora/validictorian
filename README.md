@@ -4,6 +4,10 @@
 
 Node validations without ties to any framework. Based on [validator](https://github.com/chriso/validator.js).
 
+## WARNING: DEPRICATED!!!
+
+This module has been depricated! Use [validr](https://github.com/samora/validr) instead.
+
 ## Inspiration & Purpose
 
 [validator](https://github.com/chriso/validator.js) is a great validation tool, 
